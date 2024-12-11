@@ -30,6 +30,7 @@ export function createStudent(req,res){
 
 }
 
+
 export function deleteStudent(req,res){
   Student.deleteOne({name : req.body.name}).then(
     ()=>{

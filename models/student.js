@@ -3,7 +3,8 @@ import mongoose from "mongoose"
 const studentSchema = mongoose.Schema({
   name : String,
   age : Number,
-  gender : String
+  gender : String,
+  
 })
 
 const Student = mongoose.model("students",studentSchema)

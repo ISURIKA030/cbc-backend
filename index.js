@@ -7,7 +7,7 @@ import userRouter from './routes/userRouter.js';
 import jwt from "jsonwebtoken";
 const app = express();
 
-const mongoUrl = "mongodb+srv://ict21030:ISU123san@cluster0.swow9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+const mongoUrl = process.env.MONGO_DB_URI
 
 mongoose.connect(mongoUrl,{})
 
@@ -15,7 +15,12 @@ const connection = mongoose.connection;
 
 connection.once("open",()=>{
   console.log("Database connected");
+  
 })
+
+
+
+
 
 
 app.use(bodyParser.json())
