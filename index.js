@@ -8,6 +8,7 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
 dotenv.config()
+
 const app = express();
 
 const mongoUrl = process.env.MONGO_DB_URI
