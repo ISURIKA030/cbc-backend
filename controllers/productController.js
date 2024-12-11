@@ -1,97 +1,27 @@
 import Product  from "../models/product.js";
 import { isAdmin } from "./userController.js";
 
-export function getProduct(req,res){
-
-  Product.find().then(
-
-    (productList)=>{
-      res.status(200).json({
-        list : productList
-      }) 
-    }
-  ).catch(
-    (err)=>{
-      res.json({
-        message : "Error"
-      })
-    }
-  )
-}
-
 export function createProduct(req,res){
 
-  console.log(req.user)
-
-  if(req.user == null){
+  if(!isAdmin(req)){
     res.json({
-      message : "You are not logged in"
+      message: "please login as a administrator to add products"
     })
+
     return
   }
 
-  
+  const newProductData = req.body
 
-  const product = new Product(req.body)
+  const product = new product(newProductData)
 
   product.save().then(()=>{
     res.json({
-      message: "Product created"
+      message: "product created"
     })
-  }).catch(()=>{
+  }).catch((error)=>{
     res.json({
-      message: "Product not created"
+      message : error
     })
   })
-}
-
-export function deleteProduct(req,res){
-
-  Product.deleteOne({name : req.params.name}).then(
-    ()=>{
-      res.json(
-        {
-          message : "Product deleted successfully"
-        }
-      )
-    }
-  ).catch(
-    ()=>{
-      res.json(
-        {
-          message : "Product not deleted"
-        }
-      )
-    }
-  )
-}
-
-export function getProductByName(req,res){
-
-  const name = req.params.name;
-
-  Product.find({name : name}).then(
-
-    (productList)=>{
-
-      if(productList.length == 0){
-        res.json({
-          message : "Product not found"
-        })
-      }else{
-        res.json({
-          list : productList
-        })
-      }
-
-      
-    }
-  ).catch(
-    ()=>{
-      res.json({
-        message : "Product not found"
-      })
-    }
-  )
-
 }
