@@ -18,7 +18,7 @@ export function createUser(req,res){
 
     if(req.user.type != "admin"){
       res.json({
-        message: "sorry!... only admin can create another admin accounts"
+        message: "sorry!.. only admin can create another admin accounts"
       })
       return
     }
