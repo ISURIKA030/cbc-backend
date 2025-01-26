@@ -4,8 +4,10 @@ import mongoose from 'mongoose';
 
 import productRouter from './routes/productRouter.js';
 import userRouter from './routes/userRouter.js';
+import orderRouter from './routes/orderRouter.js';
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+
 
 dotenv.config()
 
@@ -22,6 +24,34 @@ connection.once("open",()=>{
   console.log("Database connected");
   
 })
+
+app.use(bodyParser.json())
+
+app.use(
+
+  (req,res,next)=>{
+
+
+
+    const token = req.header("Authorization")?.replace("Bearer ","")
+    console.log(token)
+
+    if(token != null){
+      jwt.verify(token,process.env.SECRET , (error,decoded)=>{
+
+        if(!error){
+          req.user = decoded   
+          console.log(decoded)     
+        }
+
+      })
+    }
+
+    next()
+
+  }
+
+)
 
 
 
@@ -56,6 +86,7 @@ app.use(
 
 app.use("/api/products",productRouter)
 app.use("/api/users",userRouter)
+app.use("/api/orders",orderRouter)
 
 app.listen(5001,()=>{
     console.log('Server is running on port 5001');
