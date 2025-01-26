@@ -9,6 +9,8 @@ productRouter.get("/",getProducts)
 
 productRouter.get("/search/:query",searchProducts)
 
+productRouter.get("/:productId",getProductById)
+
 
 
 export default productRouter;
