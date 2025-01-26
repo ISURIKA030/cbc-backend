@@ -4,3 +4,4 @@ import { createOrder, getOrders, getQuote, updateOrder } from '../controllers/or
 const orderRouter = express.Router();
 
 orderRouter.post("/", createOrder)
+orderRouter.get("/", getOrders)
