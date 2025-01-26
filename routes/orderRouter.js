@@ -5,3 +5,4 @@ const orderRouter = express.Router();
 
 orderRouter.post("/", createOrder)
 orderRouter.get("/", getOrders)
+orderRouter.post("/quote",getQuote)
