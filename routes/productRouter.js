@@ -7,6 +7,8 @@ productRouter.post("/",createProduct)
 
 productRouter.get("/",getProducts)
 
+productRouter.get("/search/:query",searchProducts)
+
 
 
 export default productRouter;
