@@ -11,6 +11,8 @@ productRouter.get("/search/:query",searchProducts)
 
 productRouter.get("/:productId",getProductById)
 
+productRouter.delete("/:productId",deleteProduct)
+
 
 
 export default productRouter;
