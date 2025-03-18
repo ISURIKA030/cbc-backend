@@ -10,19 +10,20 @@ export function createUser(req,res){
 
   if(newUserData.type == "admin"){
 
-    if(req.user == null){
+    if(req.user==null){
       res.json({
-        message: "please login as administrator to create admin accounts"
+        message: "Please login as administrator to create admin accounts"
       })
       return
     }
 
     if(req.user.type != "admin"){
       res.json({
-        message: "sorry!.. only admin can create another admin accounts"
+        message: "Please login as administrator to create admin accounts"
       })
       return
     }
+
   }
 
   newUserData.password = bcrypt.hashSync(newUserData.password, 10)  
@@ -70,7 +71,14 @@ export function loginUser(req,res){
           
           res.json({
             message: "User logged in",
-            token: token
+            token: token,
+            user : {
+              firstName : user.firstName,
+              lastName : user.lastName,
+              type : user.type,
+              profilePicture : user.profilePicture,
+              email : user.email
+            }
           })
           
         }else{
@@ -84,23 +92,23 @@ export function loginUser(req,res){
 }
 
 export function isAdmin(req){
-  if(req.user == null){
+  if(req.user==null){
     return false
   }
 
-  if(req.user.type =! "admin"){
+  if(req.user.type != "admin"){
     return false
   }
+
   return true
 }
 
 export function isCustomer(req){
-
-  if(req.user == null){
+  if(req.user==null){
     return false
   }
 
-  if(req.user.type =! "customer"){
+  if(req.user.type != "customer"){
     return false
   }
 
@@ -173,3 +181,6 @@ export async function googleLogin(req,res){
 
 
 }
+
+// malith27@example.com securepassword123 - admin
+// malith28@example.com securepassword123 -customer
