@@ -35,6 +35,7 @@ export function createUser(req,res){
       message: "User created"
     })
   }).catch((error)=>{
+    console.error("Error creating user:", error); 
     res.json({      
       message: "User not created"
     })
